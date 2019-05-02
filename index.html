@@ -51,6 +51,8 @@
       var beta     = event.beta; //x axis rotation [-180, 180]
       var gamma    = event.gamma; //y axis rotation [-90, 90]
 
+      console.log("IINNEEE")
+
       //Check if absolute values have been sent
       if (typeof event.webkitCompassHeading !== "undefined") {
         alpha = event.webkitCompassHeading; //iOS non-standard
