@@ -25,12 +25,9 @@
 
     function displayMessage(message){
       const tag = document.createElement("p");  
-      //const dirTag = document.createElement("p");   
       const displayDiv = document.getElementById('display');
       tag.innerHTML = message.message;
-      //dirTag.innerHTML = direction;
       displayDiv.appendChild(tag);
-     // displayDiv.appendChild(dirTag);
     }
 
     pubnubDemo.subscribe({
