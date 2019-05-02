@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>title</title>
+  </head>
+  <body>
+    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.21.7.js"></script>
+    <!-- Instantiate PubNub -->
+    <script type="text/javascript">
+    var pubnubDemo = new PubNub({
+    
+    publishKey: 'pub-c-7ab40221-08ea-4c9e-a5ed-8de98c8d5253',
+    
+    subscribeKey: 'sub-c-40c01cfe-6c46-11e9-81d5-56c3556875f9'
+    
+    });
+    pubnubDemo.addListener({
+        message: function(message){
+        console.log('message came in: ', message)
+        displayMessage(message);
+        
+        }
+    })
+
+    function displayMessage(message){
+      const tag = document.createElement("p");  
+      //const dirTag = document.createElement("p");   
+      const displayDiv = document.getElementById('display');
+      tag.innerHTML = message.message;
+      //dirTag.innerHTML = direction;
+      displayDiv.appendChild(tag);
+     // displayDiv.appendChild(dirTag);
+    }
+
+    pubnubDemo.subscribe({
+      channels: ['demo_tutorial']
+    });
+
+   // pubnubDemo.publish({ message: { "color" : "blue" }, channel: 'demo_tutorial' });
+
+    function publishMessage(){
+      var newMessage = document.getElementById("textfield").value;
+      pubnubDemo.publish({ message: newMessage, channel: 'demo_tutorial' });
+    }
+
+    </script>
+    <script>
+ // Get event data
+
+
+ function deviceOrientationListener(event) {
+      var alpha    = event.alpha; //z axis rotation [0,360)
+      var beta     = event.beta; //x axis rotation [-180, 180]
+      var gamma    = event.gamma; //y axis rotation [-90, 90]
+      //Check if absolute values have been sent
+      if (typeof event.webkitCompassHeading !== "undefined") {
+        alpha = event.webkitCompassHeading; //iOS non-standard
+        var heading = alpha
+        document.getElementById("heading").innerHTML = heading.toFixed([0]);
+      }
+      else
+        if (event.absolute) {
+        alpha = event.alpha;
+        var heading = 360 - alpha; //heading [0, 360)
+        document.getElementById("heading").innerHTML = heading.toFixed([0]);
+      }
+
+      else {
+        window.alert (' This browser doesnt support true heading' );
+      }
+      
+      // Change backgroud colour based on heading
+      // Green for North and South, black otherwise
+      if (heading > 359 || heading < 1) { //Allow +- 1 degree
+        document.body.style.backgroundColor = "green";
+        document.getElementById("heading").innerHTML = "N"; // North
+      }
+      else if (heading > 179 && heading < 181){ //Allow +- 1 degree
+        document.body.style.backgroundColor = "green";
+        document.getElementById("heading").innerHTML = "S"; // South
+      } 
+      else { // Otherwise, use near black
+        document.body.style.backgroundColor = "#161616";
+      }
+    }
+    
+
+
+    // Check if device can provide absolute orientation data
+    if (window.DeviceOrientationAbsoluteEvent) {
+      window.addEventListener("DeviceOrientationAbsoluteEvent", deviceOrientationListener);
+    } // If not, check if the device sends any orientation data
+    else if(window.DeviceOrientationEvent){
+      window.addEventListener("deviceorientation", deviceOrientationListener);
+    } // Send an alert if the device isn't compatible
+    else {
+      alert("Sorry, try again on a compatible mobile device!");
+    }
+    </script>
+      <h1>Chapp at</h1>
+      <div id="display">
+      </div>
+      <div class="message">
+        <input type="text" id="textfield" placeholder="Write your message">
+        </input>
+        <input type="submit" value="Send" onclick="publishMessage()"></input>
+      </div>
+    <p id=”heading”></p>
+    
+  </body>
+</html>
