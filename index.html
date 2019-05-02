@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>title</title>
+    <title>chapp at</title>
   </head>
   <body>
     <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.21.7.js"></script>
@@ -50,7 +50,6 @@
       var alpha    = event.alpha; //z axis rotation [0,360)
       var beta     = event.beta; //x axis rotation [-180, 180]
       var gamma    = event.gamma; //y axis rotation [-90, 90]
-      document.getElementById("heading").innerHTML = alpha;
       //Check if absolute values have been sent
       if (typeof event.webkitCompassHeading !== "undefined") {
         alpha = event.webkitCompassHeading; //iOS non-standard
