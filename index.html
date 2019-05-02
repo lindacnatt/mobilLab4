@@ -17,74 +17,66 @@
     });
     pubnubDemo.addListener({
         message: function(message){
-        console.log('message came in: ', message)
-        displayMessage(message);
-        
+          console.log(message.message.color)
+          console.log(message.channel)
         }
-    })
+      })
 
-    function displayMessage(message){
-      const tag = document.createElement("p");  
-      const displayDiv = document.getElementById('display');
-      tag.innerHTML = message.message;
-      displayDiv.appendChild(tag);
-    }
+      pubnubDemo.subscribe({
+        channels: ['north', 'south', 'west']
+      });
 
-    pubnubDemo.subscribe({
-      channels: ['demo_tutorial']
-    });
-
-   // pubnubDemo.publish({ message: { "color" : "blue" }, channel: 'demo_tutorial' });
-
-    function publishMessage(){
-      var newMessage = document.getElementById("textfield").value;
-      pubnubDemo.publish({ message: newMessage, channel: 'demo_tutorial' });
-    }
 
     </script>
     <script>
- // Get event data
 
+    function sendMessage(inputfält, kanal){
 
- function deviceOrientationListener(event) {
+    pubnubDemo.publish({
+      message: { "color" : "red" },
+      channel: 'west' });
+
+    }
+
+    // Get event data
+    function deviceOrientationListener(event) {
       var alpha    = event.alpha; //z axis rotation [0,360)
       var beta     = event.beta; //x axis rotation [-180, 180]
       var gamma    = event.gamma; //y axis rotation [-90, 90]
-
       //Check if absolute values have been sent
       if (typeof event.webkitCompassHeading !== "undefined") {
         alpha = event.webkitCompassHeading; //iOS non-standard
         var heading = alpha
         document.getElementById("heading").innerHTML = heading.toFixed([0]);
       }
-      else
-        if (event.absolute) {
-        alpha = event.alpha;
+      else {
+        alert("Your device is reporting relative alpha values, so this compass won't point north :(");
         var heading = 360 - alpha; //heading [0, 360)
         document.getElementById("heading").innerHTML = heading.toFixed([0]);
       }
 
-      else {
-        console.log(' This browser doesnt support true heading' );
-      }
-      
+
       // Change backgroud colour based on heading
       // Green for North and South, black otherwise
       if (heading > 359 || heading < 1) { //Allow +- 1 degree
         document.body.style.backgroundColor = "green";
         document.getElementById("heading").innerHTML = "N"; // North
-        console.log("IINNEEE")
+       }
+
+      else if (heading <= 150 && heading < 151){
+        document.body.style.backgroundColor = "green";
+
       }
+
       else if (heading > 179 && heading < 181){ //Allow +- 1 degree
         document.body.style.backgroundColor = "green";
         document.getElementById("heading").innerHTML = "S"; // South
-      } 
+      }
       else { // Otherwise, use near black
         document.body.style.backgroundColor = "#161616";
+        //pubnubDemo.unsubscribeAll();
       }
     }
-    
-
 
     // Check if device can provide absolute orientation data
     if (window.DeviceOrientationAbsoluteEvent) {
