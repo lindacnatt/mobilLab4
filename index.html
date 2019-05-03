@@ -60,9 +60,17 @@
         document.body.style.backgroundColor = "green";
         document.getElementById("heading").innerHTML = "N"; // North
       }
+      else if (heading > 225 && heading < 314) { //Allow +- 1 degree
+        document.body.style.backgroundColor = "red";
+        document.getElementById("heading").innerHTML = "E"; // East
+      }
+      else if (heading > 45 && heading < 135) { //Allow +- 1 degree
+        document.body.style.backgroundColor = "blue";
+        document.getElementById("heading").innerHTML = "W"; // WEST
+      }
 
       else if (heading > 135 && heading < 225) { //Allow +- 1 degree
-        document.body.style.backgroundColor = "green";
+        document.body.style.backgroundColor = "pink";
         document.getElementById("heading").innerHTML = "S"; // South
       }
       else { // Otherwise, use near black
