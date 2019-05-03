@@ -25,17 +25,30 @@
       message: function (message) {
         console.log(message.message)
         console.log(message.channel)
+        displayMessage(message.message, message.channel)
       }
     })
 
     pubnubDemo.subscribe({
-      channels: ['north', 'south', 'west', ]
+      channels: ['north', 'south', 'west','east' ]
     });
+
+    function publishMessage(){
+    var dir = document.getElementById('chat-direction').innerText;
+    var newMessage = document.getElementById('textfield').value;
+    pubnubDemo.publish({ message: newMessage, channel: dir });
+    }
+
+    function displayMessage(message, channel){
+      const tag = document.createElement("p");  
+      const channelDiv = document.getElementById(channel);
+      tag.innerHTML = message.message;
+      channelDiv.appendChild(tag);
+    }
 
 
   </script>
   <script>
-
     // Get event data
     function deviceOrientationListener(event) {
       var alpha = event.alpha; //z axis rotation [0,360)
@@ -45,33 +58,46 @@
       if (typeof event.webkitCompassHeading !== "undefined") {
         alpha = event.webkitCompassHeading; //iOS non-standard
         var heading = alpha
-        document.getElementById("heading").innerHTML = heading.toFixed([0]);
       }
       else {
         alert("Your device is reporting relative alpha values, so this compass won't point north :(");
         var heading = 360 - alpha; //heading [0, 360)
-        document.getElementById("heading").innerHTML = heading.toFixed([0]);
       }
-
 
       // Change backgroud colour based on heading
       // Green for North and South, black otherwise
       if (heading > 315 || heading < 45) { //Allow +- 1 degree
         document.body.style.backgroundColor = "green";
         document.getElementById("heading").innerHTML = "N"; // North
+        document.getElementById("north").style.display = "block"
+        document.getElementById("east").style.display = "none"
+        document.getElementById("west").style.display = "none"
+        document.getElementById("south").style.display = "none"
       }
       else if (heading > 225 && heading < 314) { //Allow +- 1 degree
         document.body.style.backgroundColor = "red";
         document.getElementById("heading").innerHTML = "E"; // East
+        document.getElementById("north").style.display = "none"
+        document.getElementById("east").style.display = "block"
+        document.getElementById("west").style.display = "none"
+        document.getElementById("south").style.display = "none"
       }
       else if (heading > 45 && heading < 135) { //Allow +- 1 degree
         document.body.style.backgroundColor = "blue";
         document.getElementById("heading").innerHTML = "W"; // WEST
+        document.getElementById("north").style.display = "none"
+        document.getElementById("east").style.display = "none"
+        document.getElementById("west").style.display = "block"
+        document.getElementById("south").style.display = "none"
       }
 
       else if (heading > 135 && heading < 225) { //Allow +- 1 degree
         document.body.style.backgroundColor = "pink";
         document.getElementById("heading").innerHTML = "S"; // South
+        document.getElementById("north").style.display = "none"
+        document.getElementById("east").style.display = "none"
+        document.getElementById("west").style.display = "none"
+        document.getElementById("south").style.display = "block"
       }
       else { // Otherwise, use near black
         document.body.style.backgroundColor = "#161616";
@@ -94,6 +120,10 @@
 
 <body>
   <div id="chat-direction"></div>
+  <div class="display" id="north" style="display: none" ></div>
+  <div class="display" id="south" style="display: none"></div>
+  <div class="display" id="east" style="display: none"></div>
+  <div class="display" id="west" style="display: none"></div>
       <div class="message">
         <input type="text" id="textfield" placeholder="Write your message">
         </input>
