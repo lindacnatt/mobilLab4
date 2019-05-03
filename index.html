@@ -17,8 +17,8 @@
   <script type="text/javascript">
 
     var pubnubDemo = new PubNub({
-      publishKey: 'pub-c-7ab40221-08ea-4c9e-a5ed-8de98c8d5253',
-      subscribeKey: 'sub-c-40c01cfe-6c46-11e9-81d5-56c3556875f9'
+      publishKey: 'pub-c-46b4ff32-3ba1-43e9-96e0-ad78f7c61ceb',
+      subscribeKey: 'sub-c-65fd0c82-6d88-11e9-a9da-06324c5f6dce'
     });
 
     pubnubDemo.addListener({
@@ -41,6 +41,7 @@
 
     function displayMessage(message, channel){
       const tag = document.createElement("p");  
+      console.log(channel)
       const channelDiv = document.getElementById(channel);
       tag.innerHTML = message.message;
       channelDiv.appendChild(tag);
