@@ -38,7 +38,7 @@
     console.log(dir)
     var newMessage = document.getElementById('textfield').value;
     console.log(newMessage)
-    //pubnubDemo.publish({ message: newMessage, channel: dir });
+    pubnubDemo.publish({ message: newMessage, channel: [dir] });
     }
 
     function displayMessage(message, channel){
