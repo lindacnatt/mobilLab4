@@ -37,7 +37,6 @@
     var dir = document.getElementById('chat-direction').innerText;
     console.log(dir)
     var newMessage = document.getElementById('textfield').value;
-    console.log(newMessage)
     pubnubDemo.publish({ message: newMessage, channel: [dir] });
     }
 
@@ -76,6 +75,8 @@
         document.getElementById("east").style.display = "none"
         document.getElementById("west").style.display = "none"
         document.getElementById("south").style.display = "none"
+
+        document.getElementById("chat-direction").innerHTML = "north";
       }
       else if (heading > 225 && heading < 314) { //Allow +- 1 degree
         document.body.style.backgroundColor = "red";
@@ -84,6 +85,7 @@
         document.getElementById("east").style.display = "block"
         document.getElementById("west").style.display = "none"
         document.getElementById("south").style.display = "none"
+        document.getElementById("chat-direction").innerHTML = "east";
       }
       else if (heading > 45 && heading < 135) { //Allow +- 1 degree
         document.body.style.backgroundColor = "blue";
@@ -92,6 +94,7 @@
         document.getElementById("east").style.display = "none"
         document.getElementById("west").style.display = "block"
         document.getElementById("south").style.display = "none"
+        document.getElementById("chat-direction").innerHTML = "west";
       }
 
       else if (heading > 135 && heading < 225) { //Allow +- 1 degree
@@ -101,6 +104,7 @@
         document.getElementById("east").style.display = "none"
         document.getElementById("west").style.display = "none"
         document.getElementById("south").style.display = "block"
+        document.getElementById("chat-direction").innerHTML = "pink";
       }
       else { // Otherwise, use near black
         document.body.style.backgroundColor = "#161616";
