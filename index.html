@@ -35,7 +35,9 @@
 
     function publishMessage(){
     var dir = document.getElementById('chat-direction').innerText;
+    console.log(dir)
     var newMessage = document.getElementById('textfield').value;
+    console.log(newMessage)
     pubnubDemo.publish({ message: newMessage, channel: dir });
     }
 
