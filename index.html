@@ -17,21 +17,19 @@
   <script type="text/javascript">
 
     var pubnubDemo = new PubNub({
-
       publishKey: 'pub-c-7ab40221-08ea-4c9e-a5ed-8de98c8d5253',
-
       subscribeKey: 'sub-c-40c01cfe-6c46-11e9-81d5-56c3556875f9'
     });
 
     pubnubDemo.addListener({
       message: function (message) {
-        console.log(message.message.color)
+        console.log(message.message)
         console.log(message.channel)
       }
     })
 
     pubnubDemo.subscribe({
-      channels: ['north', 'south', 'west']
+      channels: ['north', 'south', 'west', ]
     });
 
 
@@ -58,25 +56,14 @@
 
       // Change backgroud colour based on heading
       // Green for North and South, black otherwise
-      if (heading > 359 || heading < 1) { //Allow +- 1 degree
+      if (heading > 315 || heading < 45) { //Allow +- 1 degree
         document.body.style.backgroundColor = "green";
         document.getElementById("heading").innerHTML = "N"; // North
-        pubnubDemo.publish({
-        message: "Hello! I'm in the north!", channel: 'north'
-      });
       }
 
-      else if (heading <= 150 && heading < 151) {
-        document.body.style.backgroundColor = "green";
-
-      }
-
-      else if (heading > 179 && heading < 181) { //Allow +- 1 degree
+      else if (heading > 135 && heading < 225) { //Allow +- 1 degree
         document.body.style.backgroundColor = "green";
         document.getElementById("heading").innerHTML = "S"; // South
-        pubnubDemo.publish({
-        message: "I'm in the south!", channel: 'south'
-      });
       }
       else { // Otherwise, use near black
         document.body.style.backgroundColor = "#161616";
@@ -98,6 +85,12 @@
 </head>
 
 <body>
+  <div id="chat-direction"></div>
+      <div class="message">
+        <input type="text" id="textfield" placeholder="Write your message">
+        </input>
+        <input type="submit" value="Send" onclick="publishMessage()"></input>
+      </div>
     <p id="heading" style="text-align:center"></p>
 </body>
 
