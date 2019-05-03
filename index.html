@@ -42,9 +42,8 @@
 
     function displayMessage(message, channel){
       const tag = document.createElement("p");  
-      console.log(channel)
       const channelDiv = document.getElementById(channel);
-      tag.innerHTML = message.message;
+      tag.innerHTML = message;
       channelDiv.appendChild(tag);
     }
 
