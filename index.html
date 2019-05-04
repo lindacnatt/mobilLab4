@@ -3,6 +3,7 @@
 
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.21.7.js"></script>
   <style>
     body{
@@ -16,6 +17,16 @@
     .display{
       font-size: 3vw;
     }
+    .message{
+      display: flex;
+      align-items: flex-end;
+      background: whitesmoke;
+    }
+    p{
+      background: lightskyblue;
+      border-radius: 25%;
+    }
+
   </style>
   <title>Compass</title>
 
@@ -135,9 +146,9 @@
   <div class="display" id="east" style="display: none"></div>
   <div class="display" id="west" style="display: none"></div>
       <div class="message">
-        <input type="text" id="textfield" label="Write your message">
+        <input type="text" id="textfield"  label="Write your message">
         </input>
-        <input type="submit" value="Send" onclick="publishMessage()"></input>
+        <input type="submit" id="btn" value="Send" onclick="publishMessage()"></input>
       </div>
 </body>
 
