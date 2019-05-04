@@ -19,8 +19,10 @@
 
     .display {
       font-size: 5vw;
-      height:95%;
+      min-height:95%;
+      max-height:95%;
       width:100%;
+      overflow: auto;
     }
 
     .message {
@@ -37,10 +39,9 @@
     }
 
     p {
-      background: whitesmoke;
-      border-radius: 50%;
-      padding: 10px;
-      margin-left: 20px;
+      background: lightgrey;
+      border-radius: 25%;
+      padding: 20px;
       white-space: normal;
       word-wrap: break-word;
       max-width:100%;
@@ -108,7 +109,6 @@
       if (heading > 315 || heading < 45) { //Allow +- 1 degree
         document.body.style.backgroundColor = "#95E29E";
         document.getElementById("north").style.display = "block"
-        document.getElementById("north").scrollTop = document.getElementById("north").scrollHeight;
         document.getElementById("east").style.display = "none"
         document.getElementById("west").style.display = "none"
         document.getElementById("south").style.display = "none"
