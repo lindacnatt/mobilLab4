@@ -20,6 +20,8 @@
     .display {
       font-size: 5vw;
       overflow-anchor: none;
+      height:95%;
+      width:100%;
     }
 
     .message {
@@ -35,14 +37,16 @@
     }
 
     p {
-      display: inline-block;
       background: whitesmoke;
       border-radius: 50%;
       padding: 10px;
       margin-left: 20px;
       white-space: normal;
+      word-wrap: break-word;
       overflow-anchor: auto;
+      max-width:100%;
     }
+
   </style>
   <title>Compass</title>
 
@@ -103,7 +107,7 @@
       // Change backgroud colour based on heading
       // Green for North and South, black otherwise
       if (heading > 315 || heading < 45) { //Allow +- 1 degree
-        document.body.style.backgroundColor = "#95E29E;";
+        document.body.style.backgroundColor = "#95E29E";
         document.getElementById("north").style.display = "block"
         document.getElementById("east").style.display = "none"
         document.getElementById("west").style.display = "none"
@@ -120,7 +124,7 @@
         document.getElementById("chat-direction").innerHTML = "east";
       }
       else if (heading > 45 && heading < 135) { //Allow +- 1 degree
-        document.body.style.backgroundColor = "#95C4E2;";
+        document.body.style.backgroundColor = "#95C4E2";
         document.getElementById("north").style.display = "none"
         document.getElementById("east").style.display = "none"
         document.getElementById("west").style.display = "block"
@@ -129,7 +133,7 @@
       }
 
       else if (heading > 135 && heading < 225) { //Allow +- 1 degree
-        document.body.style.backgroundColor = "#FCB0B0;";
+        document.body.style.backgroundColor = "#FCB0B0";
         document.getElementById("north").style.display = "none"
         document.getElementById("east").style.display = "none"
         document.getElementById("west").style.display = "none"
