@@ -2,47 +2,52 @@
 <html>
 
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.21.7.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.21.7.js"></script>
   <style>
-    body{
-      text-align:center;
+    body {
+      text-align: center;
       color: #FFFFFF;
       font-family: verdana;
     }
+
     #heading {
       font-size: 40vw;
     }
-    .display{
+
+    .display {
       font-size: 5vw;
       overflow-anchor: none;
     }
-    .message{
-      display: flex;
-      align-self: flex-end;
-      justify-content: space-between;
-      padding-top:10px;
+
+    .message {
+      position: absolute;
+      bottom: 0;
+      padding-top: 10px;
       padding-bottom: 10px;
       background: whitesmoke;
     }
-    .message >*{
-      margin:5px;
+
+    .message>* {
+      margin: 5px;
     }
-    p{
-      background: lightskyblue;
-      border-radius: 25%;
-      padding:10px;
+
+    p {
+      display: inline-block;
+      background: whitesmoke;
+      border-radius: 50%;
+      padding: 10px;
       margin-left: 20px;
       white-space: normal;
       overflow-anchor: auto;
     }
-
   </style>
   <title>Compass</title>
 
 
-  
+
 
   <script type="text/javascript">
 
@@ -53,25 +58,25 @@
 
     pubnubDemo.addListener({
       message: function (message) {
-        console.log("pubDemo: " , message.message)
+        console.log("pubDemo: ", message.message)
         console.log(message.channel)
         displayMessage(message.message, message.channel)
       }
     })
 
     pubnubDemo.subscribe({
-      channels: ['north', 'south', 'west', 'east' ]
+      channels: ['north', 'south', 'west', 'east']
     });
 
-    function publishMessage(){
-    var dir = document.getElementById('chat-direction').innerText;
-    var newMessage = document.getElementById('textfield').value;
-    console.log("publishMessage: ", newMessage)
-    pubnubDemo.publish({ message: newMessage, channel: [dir] });
+    function publishMessage() {
+      var dir = document.getElementById('chat-direction').innerText;
+      var newMessage = document.getElementById('textfield').value;
+      console.log("publishMessage: ", newMessage)
+      pubnubDemo.publish({ message: newMessage, channel: [dir] });
     }
 
-    function displayMessage(message, channel){
-      const tag = document.createElement("p");  
+    function displayMessage(message, channel) {
+      const tag = document.createElement("p");
       const channelDiv = document.getElementById(channel);
       tag.innerHTML = message;
       channelDiv.appendChild(tag);
@@ -98,7 +103,7 @@
       // Change backgroud colour based on heading
       // Green for North and South, black otherwise
       if (heading > 315 || heading < 45) { //Allow +- 1 degree
-        document.body.style.backgroundColor = "green";
+        document.body.style.backgroundColor = "#95E29E;";
         document.getElementById("north").style.display = "block"
         document.getElementById("east").style.display = "none"
         document.getElementById("west").style.display = "none"
@@ -107,7 +112,7 @@
         document.getElementById("chat-direction").innerHTML = "north";
       }
       else if (heading > 225 && heading < 314) { //Allow +- 1 degree
-        document.body.style.backgroundColor = "red";
+        document.body.style.backgroundColor = "#EFE89E";
         document.getElementById("north").style.display = "none"
         document.getElementById("east").style.display = "block"
         document.getElementById("west").style.display = "none"
@@ -115,7 +120,7 @@
         document.getElementById("chat-direction").innerHTML = "east";
       }
       else if (heading > 45 && heading < 135) { //Allow +- 1 degree
-        document.body.style.backgroundColor = "blue";
+        document.body.style.backgroundColor = "#95C4E2;";
         document.getElementById("north").style.display = "none"
         document.getElementById("east").style.display = "none"
         document.getElementById("west").style.display = "block"
@@ -124,7 +129,7 @@
       }
 
       else if (heading > 135 && heading < 225) { //Allow +- 1 degree
-        document.body.style.backgroundColor = "pink";
+        document.body.style.backgroundColor = "#FCB0B0;";
         document.getElementById("north").style.display = "none"
         document.getElementById("east").style.display = "none"
         document.getElementById("west").style.display = "none"
@@ -152,15 +157,15 @@
 
 <body>
   <div id="chat-direction"></div>
-  <div class="display" id="north" style="display: none" ></div>
+  <div class="display" id="north" style="display: none"></div>
   <div class="display" id="south" style="display: none"></div>
   <div class="display" id="east" style="display: none"></div>
   <div class="display" id="west" style="display: none"></div>
-      <div class="message">
-        <input type="text" id="textfield"  label="Write your message">
-        </input>
-        <input type="submit" class="btn btn-primary" value="Send" onclick="publishMessage()"></input>
-      </div>
+  <div class="message">
+    <input type="text" id="textfield" label="Write your message">
+    </input>
+    <input type="submit" class="btn btn-primary" value="Send" onclick="publishMessage()"></input>
+  </div>
 </body>
 
 </html>
