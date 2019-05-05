@@ -13,46 +13,34 @@
       font-family: verdana;
     }
 
-    #chat-direction {
-      text-transform: uppercase;
-      font-weight: bold;
-      font-size: 8vw;
-    }
-
     #heading {
       font-size: 40vw;
     }
 
-    #page-container {
+    #page-container{
       position: relative;
-      min-height: 90vh;
+      min-height: 100vh;
     }
 
     .display {
       font-size: 5vw;
-      padding-bottom: 3rem;
-      width: 100%;
+      padding-bottom: 2.5rem;
+      width:100%;
     }
 
-    .message {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      height: 3rem;
-      background: whitesmoke;
+    .message{
+      position:absolute;
+      bottom:0;
+      width:100%;
+      height:2.5rem;
     }
-
-    .message>* {
-      padding: 10px;
-    }
-
     p {
       background: grey;
-      border-radius: 25px;
+      border-radius: 25%;
       padding: 20px;
       white-space: normal;
       word-wrap: break-word;
-      max-width: 80%;
+      max-width:80%;
     }
   </style>
   <title>Compass</title>
@@ -127,19 +115,19 @@
       else if (heading > 225 && heading < 314) { //Allow +- 1 degree
         document.body.style.backgroundColor = "#EFE89E";
         document.getElementById("north").style.display = "none"
-        document.getElementById("east").style.display = "none"
-        document.getElementById("west").style.display = "block"
+        document.getElementById("east").style.display = "block"
+        document.getElementById("west").style.display = "none"
         document.getElementById("south").style.display = "none"
-        document.getElementById("chat-direction").innerHTML = "west";
+        document.getElementById("chat-direction").innerHTML = "east";
       }
       //WEST
       else if (heading > 45 && heading < 135) { //Allow +- 1 degree
         document.body.style.backgroundColor = "#95C4E2";
         document.getElementById("north").style.display = "none"
-        document.getElementById("east").style.display = "block"
-        document.getElementById("west").style.display = "none"
+        document.getElementById("east").style.display = "none"
+        document.getElementById("west").style.display = "block"
         document.getElementById("south").style.display = "none"
-        document.getElementById("chat-direction").innerHTML = "east";
+        document.getElementById("chat-direction").innerHTML = "west";
       }
       //SOUTH
       else if (heading > 135 && heading < 225) { //Allow +- 1 degree
@@ -177,9 +165,9 @@
     <div class="display" id="east" style="display: none"></div>
     <div class="display" id="west" style="display: none"></div>
     <div class="message">
-      <input type="text" id="textfield">
+      <input type="text" id="textfield" label="Write your message">
       </input>
-      <input type="submit" class="btn btn-primary" value="Send" onclick="publishMessage()"></input>
+      <input type="submit" value="Send" onclick="publishMessage()"></input>
     </div>
   </div>
 </body>
