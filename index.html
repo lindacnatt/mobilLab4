@@ -16,15 +16,19 @@
     #heading {
       font-size: 40vw;
     }
-
+    #chat-direction {
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 8vw;
+    }
     #page-container{
       position: relative;
-      min-height: 100vh;
+      min-height: 85vh;
     }
 
     .display {
       font-size: 5vw;
-      padding-bottom: 2.5rem;
+      padding-bottom: 3rem;
       width:100%;
     }
 
@@ -32,14 +36,17 @@
       position:absolute;
       bottom:0;
       width:100%;
-      height:2.5rem;
+      height:3rem;
+      background: whitesmoke;
+      padding:5px;
     }
     p {
       background: grey;
-      border-radius: 25%;
+      border-radius: 25px;
       padding: 20px;
       white-space: normal;
       word-wrap: break-word;
+      min-width:20%;
       max-width:80%;
     }
   </style>
@@ -167,7 +174,7 @@
     <div class="message">
       <input type="text" id="textfield" label="Write your message">
       </input>
-      <input type="submit" value="Send" onclick="publishMessage()"></input>
+      <input type="submit" class="btn btn-primary" value="Send" onclick="publishMessage()"></input>
     </div>
   </div>
 </body>
