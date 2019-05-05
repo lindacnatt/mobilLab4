@@ -20,7 +20,7 @@
 
     #page-container{
       position: relative;
-      min-height: 95vh;
+      min-height: 85vh;
     }
 
     .display {
@@ -35,6 +35,9 @@
       width:100%;
       height:2.5rem;
       background: whitesmoke;
+    }
+    .message > *{
+      padding: 5px;
     }
     p {
       background: grey;
@@ -168,9 +171,9 @@
     <div class="display" id="east" style="display: none"></div>
     <div class="display" id="west" style="display: none"></div>
     <div class="message">
-      <input type="text" id="textfield" label="Write your message">
+      <input type="text" id="textfield">
       </input>
-      <input type="submit" value="Send" onclick="publishMessage()"></input>
+      <input type="submit" class="btn btn-primary" value="Send" onclick="publishMessage()"></input>
     </div>
   </div>
 </body>
