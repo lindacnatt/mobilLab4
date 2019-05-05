@@ -29,7 +29,8 @@
       width: 100%;
       height: 3rem;
       background: whitesmoke;
-      padding:10px;
+      padding-top:10px;
+      padding-bottom:20px;
     }
     p {
       border-radius: 25px;
@@ -37,7 +38,7 @@
       padding:5px;
       white-space: normal;
       word-wrap: break-word;
-      max-width: 20%;
+      min-width: 20%;
       max-width: 80%;
     }
   </style>
@@ -163,6 +164,7 @@
       <input type="text" id="textfield">
       </input>
       <input type="submit" class="btn btn-primary" value="Send" onclick="publishMessage()"></input>
+      <input type="reset" class="btn btn-light"  value="Reset">
     </div>
   </div>
 </body>
