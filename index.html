@@ -4,20 +4,23 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.21.7.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <style>
     body {
       text-align: center;
       color: #FFFFFF;
       font-family: verdana;
     }
-
-    #heading {
-      font-size: 40vw;
+    #chat-direction{
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 8vw;
     }
 
     #page-container{
       position: relative;
-      min-height: 100vh;
+      min-height: 95vh;
     }
 
     .display {
@@ -31,6 +34,7 @@
       bottom:0;
       width:100%;
       height:2.5rem;
+      background: whitesmoke;
     }
     p {
       background: grey;
@@ -38,6 +42,7 @@
       padding: 20px;
       white-space: normal;
       word-wrap: break-word;
+      min-width:20%;
       max-width:80%;
     }
   </style>
@@ -113,19 +118,19 @@
       else if (heading > 225 && heading < 314) { //Allow +- 1 degree
         document.body.style.backgroundColor = "#EFE89E";
         document.getElementById("north").style.display = "none"
-        document.getElementById("east").style.display = "block"
-        document.getElementById("west").style.display = "none"
+        document.getElementById("east").style.display = "none"
+        document.getElementById("west").style.display = "block"
         document.getElementById("south").style.display = "none"
-        document.getElementById("chat-direction").innerHTML = "east";
+        document.getElementById("chat-direction").innerHTML = "west";
       }
       //WEST
       else if (heading > 45 && heading < 135) { //Allow +- 1 degree
         document.body.style.backgroundColor = "#95C4E2";
         document.getElementById("north").style.display = "none"
-        document.getElementById("east").style.display = "none"
-        document.getElementById("west").style.display = "block"
+        document.getElementById("east").style.display = "block"
+        document.getElementById("west").style.display = "none"
         document.getElementById("south").style.display = "none"
-        document.getElementById("chat-direction").innerHTML = "west";
+        document.getElementById("chat-direction").innerHTML = "east";
       }
       //SOUTH
       else if (heading > 135 && heading < 225) { //Allow +- 1 degree
