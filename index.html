@@ -2,25 +2,49 @@
 <html>
 
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.21.7.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.21.7.js"></script>
   <style>
-    body{
-      text-align:center;
+    body {
+      text-align: center;
       color: #FFFFFF;
       font-family: verdana;
     }
+
     #heading {
       font-size: 40vw;
     }
-    .display{
-      font-size: 3vw;
+
+    #page-container{
+      position: relative;
+      min-height: 100vh;
+    }
+
+    .display {
+      font-size: 5vw;
+      padding-bottom: 2.5rem;
+      width:100%;
+    }
+
+    .message{
+      position:absolute;
+      bottom:0;
+      width:100%;
+      height:2.5rem;
+    }
+    p {
+      background: grey;
+      border-radius: 25%;
+      padding: 20px;
+      white-space: normal;
+      word-wrap: break-word;
+      max-width:80%;
     }
   </style>
   <title>Compass</title>
 
 
-  
+
 
   <script type="text/javascript">
 
@@ -31,25 +55,25 @@
 
     pubnubDemo.addListener({
       message: function (message) {
-        console.log("pubDemo: " , message.message)
+        console.log("pubDemo: ", message.message)
         console.log(message.channel)
         displayMessage(message.message, message.channel)
       }
     })
 
     pubnubDemo.subscribe({
-      channels: ['north', 'south', 'west', 'east' ]
+      channels: ['north', 'south', 'west', 'east']
     });
 
-    function publishMessage(){
-    var dir = document.getElementById('chat-direction').innerText;
-    var newMessage = document.getElementById('textfield').value;
-    console.log("publishMessage: ", newMessage)
-    pubnubDemo.publish({ message: newMessage, channel: [dir] });
+    function publishMessage() {
+      var dir = document.getElementById('chat-direction').innerText;
+      var newMessage = document.getElementById('textfield').value;
+      console.log("publishMessage: ", newMessage)
+      pubnubDemo.publish({ message: newMessage, channel: [dir] });
     }
 
-    function displayMessage(message, channel){
-      const tag = document.createElement("p");  
+    function displayMessage(message, channel) {
+      const tag = document.createElement("p");
       const channelDiv = document.getElementById(channel);
       tag.innerHTML = message;
       channelDiv.appendChild(tag);
@@ -74,9 +98,10 @@
       }
 
       // Change backgroud colour based on heading
-      // Green for North and South, black otherwise
+
+      //NORTH
       if (heading > 315 || heading < 45) { //Allow +- 1 degree
-        document.body.style.backgroundColor = "green";
+        document.body.style.backgroundColor = "#95E29E";
         document.getElementById("north").style.display = "block"
         document.getElementById("east").style.display = "none"
         document.getElementById("west").style.display = "none"
@@ -84,25 +109,27 @@
 
         document.getElementById("chat-direction").innerHTML = "north";
       }
+      //EAST
       else if (heading > 225 && heading < 314) { //Allow +- 1 degree
-        document.body.style.backgroundColor = "red";
+        document.body.style.backgroundColor = "#EFE89E";
         document.getElementById("north").style.display = "none"
         document.getElementById("east").style.display = "block"
         document.getElementById("west").style.display = "none"
         document.getElementById("south").style.display = "none"
         document.getElementById("chat-direction").innerHTML = "east";
       }
+      //WEST
       else if (heading > 45 && heading < 135) { //Allow +- 1 degree
-        document.body.style.backgroundColor = "blue";
+        document.body.style.backgroundColor = "#95C4E2";
         document.getElementById("north").style.display = "none"
         document.getElementById("east").style.display = "none"
         document.getElementById("west").style.display = "block"
         document.getElementById("south").style.display = "none"
         document.getElementById("chat-direction").innerHTML = "west";
       }
-
+      //SOUTH
       else if (heading > 135 && heading < 225) { //Allow +- 1 degree
-        document.body.style.backgroundColor = "pink";
+        document.body.style.backgroundColor = "#FCB0B0";
         document.getElementById("north").style.display = "none"
         document.getElementById("east").style.display = "none"
         document.getElementById("west").style.display = "none"
@@ -129,16 +156,18 @@
 </head>
 
 <body>
-  <div id="chat-direction"></div>
-  <div class="display" id="north" style="display: none" ></div>
-  <div class="display" id="south" style="display: none"></div>
-  <div class="display" id="east" style="display: none"></div>
-  <div class="display" id="west" style="display: none"></div>
-      <div class="message">
-        <input type="text" id="textfield" label="Write your message">
-        </input>
-        <input type="submit" value="Send" onclick="publishMessage()"></input>
-      </div>
+  <div id="page-container">
+    <div id="chat-direction"></div>
+    <div class="display" id="north" style="display: none"></div>
+    <div class="display" id="south" style="display: none"></div>
+    <div class="display" id="east" style="display: none"></div>
+    <div class="display" id="west" style="display: none"></div>
+    <div class="message">
+      <input type="text" id="textfield" label="Write your message">
+      </input>
+      <input type="submit" value="Send" onclick="publishMessage()"></input>
+    </div>
+  </div>
 </body>
 
 </html>
